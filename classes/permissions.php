@@ -12,6 +12,6 @@ require_once 'db.php';
 //     // $userInfo = $db->single();
 //   }
 // }
-
+$join = date("Y", strtotime('+1286 years'))
 $encrypt_pass = crypt('test', $salt);
 echo $encrypt_pass;

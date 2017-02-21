@@ -4,12 +4,14 @@ define("DB_HOST", "localhost");
 define("DB_USER", "ald_sys");
 define("DB_PASS", "wk5Es98mb8fzx5nC");
 define("DB_NAME", "ald_sys");
+define("SALTKEY", "tm4O5sqiW9C3n26WMG96woL0v07yybO9");
 
 class Database {
   private $host     = DB_HOST;
   private $user     = DB_USER;
   private $pass     = DB_PASS;
   private $dbname   = DB_NAME;
+  private $salt     = SALTKEY;
   private $dbh;
   private $error;
   private $stmt;

@@ -1,5 +1,10 @@
 <?php
 require_once 'db.php';
+if(!empty($_SESSION['csrf_token']) && !empty($_SESSION['userid'])) {
+  $currentId = $_SESSION['userid'];
+} else {
+  $currentId = 0;
+}
 date_default_timezone_set('UTC');
 //Thanks Knoble for the code example
 
@@ -74,10 +79,16 @@ class User extends Database {
 		{
 			return "Update Successful!";
 		}
+  }//end of updateUser
+
+  public function currentUser($currentId) {
+    $sql = "SELECT * FROM users WHERE id='$currentId'";
+    $query = $this->prepare($sql);
+    $query->execute();
+    $userData = $query->fetch(PDO::FETCH_ASSOC);
+    if(!empty($userData)) {
+      return $userData;
+    }
   }
 
 } //end of Class User
-$join = date("Y-m-d H:i:s");
-$user = new User();
-$users = $user->getUser('admin','test');
-dump($users);

@@ -2,6 +2,8 @@
 Lavigny's Legion Logisticae System (L3S)
 
 # Special Thanks
-> themedesigner.in - Matric Admin template
+> themedesigner.in - Matrix Admin template
+
 > Bootstrap
+
 > Elite: Dangerous - Frontier Development

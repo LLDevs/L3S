@@ -1,15 +1,21 @@
 <?php
 session_start();
-$token = "";
-if (!isset($_SESSION['csrf_token'])) {
+if (!isset($_SESSION['csrf_token'])) { //should be on every page? maybe in header?
   $_SESSION['csrf_token'] = hash('sha512', 'MfGcfqz6VO8VbHM2YS0f');
+}
   $token = $_SESSION['csrf_token'];
-}
-if(!empty($_SESSION['userid'])) {
-$users = new User();
+//clears the user from the session if there is one, not how it should work
+/*if(!empty($_SESSION['userid'])) { 
+$users = new User(); 
 dump($users->currentUser($_SESSION['userid']));
+}*/
+if (!isset($_SESSION['usertype'])){
+	$_SESSION['usertype'] = false; //for use in the header section below
 }
-$login = true;
+elseif($_SESSION['usertype'] != false){ //change this to use cookies
+	header('Location:main.php');
+}
+ 
 include('includes/header.php');
 ?>
       <div id="loginbox">
@@ -17,7 +23,7 @@ include('includes/header.php');
         <form id="loginform" class="form-vertical" action="login.php" method="post">
           <div class="control-group normal_text">
             <h3>
-              <img src="/assets/img/logo.png" alt="Logo" />
+              <img src="img/logo.png" alt="Logo" />
             </h3>
           </div>
           <div class="alert alert-block"> <!--<a class="close" data-dismiss="alert" href="#">×</a>-->

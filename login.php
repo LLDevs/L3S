@@ -14,5 +14,5 @@ if(isset($_POST['submit'])) {
     header("Location: index.php");
   }
 } else {
-  header("Location: index.php");
+  header("Location: main.php");
 }

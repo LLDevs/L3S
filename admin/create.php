@@ -67,7 +67,8 @@ require_once ($_SERVER["DOCUMENT_ROOT"].'/includes/header.php');
             $discord = $_POST["discord"];
             $active = $_POST["active"];
           }
-          if(hash_equals($token, $_SESSION['csrf_token']) {
+          echo session_id();
+          if(hash_equals($token, $_SESSION['csrf_token'])) {
           echo "<h2>Your Input:</h2>";
 echo $username;
 echo "<br>";

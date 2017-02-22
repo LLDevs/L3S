@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once 'classes/users.php';
 if(isset($_POST['submit'])) {
   if(hash_equals($_POST['token'], $_SESSION['csrf_token'])) {

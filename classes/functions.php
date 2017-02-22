@@ -16,7 +16,8 @@ function breadcrumbs($data = 'Home') {
     $breadcrumbs = Array("<a href=\"$baseUrl\"><i class=\"icon-home\"></i> $data</a>");
 
     // Find out the index for the last value in our path array
-    $last = end(array_keys($path));
+    $last = array_keys($path);
+    $last = end($last);
 
     // Build the rest of the breadcrumbs
     foreach ($path AS $x => $crumb) {

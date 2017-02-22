@@ -1,0 +1,14 @@
+#loginbox {
+  padding-bottom: 20px;
+}
+#header h1 {
+  background: url(../img/nav-logo.png) no-repeat scroll 0 0 transparent;
+  height: 61px;
+  top: 8px;
+}
+
+[data-toggle=buttons]>.btn input[type=radio], [data-toggle=buttons]>.btn-group>.btn input[type=radio], [data-toggle=buttons]>.btn input[type=checkbox], [data-toggle=buttons]>.btn-group>.btn input[type=checkbox] {
+    position: absolute;
+    clip: rect(0,0,0,0);
+    pointer-events: none;
+}

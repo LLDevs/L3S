@@ -1,18 +1,19 @@
-<?php include('includes/header.php');
-// if(empty($_SESSION['userid'])) {
-// session_start();
-// // $_SESSION['userid'] = 1;
-// if (! isset($_SESSION['csrf_token'])) {
-// $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-// }
-// }
-
+<?php
+session_start();
+if (!$_SESSION['csrf_token']) {
+  $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+  $token = $_SESSION['csrf_token'];
+}
+if(!empty($_SESSION['userid'])) {
 $users = new User();
 dump($users->currentUser($_SESSION['userid']));
+}
+$login = true;
+include('includes/header.php');
 ?>
       <div id="loginbox">
 
-        <form id="loginform" class="form-vertical" action="index.html">
+        <form id="loginform" class="form-vertical" action="login.php" method="post">
           <div class="control-group normal_text">
             <h3>
               <img src="/assets/img/logo.png" alt="Logo" />
@@ -29,7 +30,8 @@ dump($users->currentUser($_SESSION['userid']));
                   <i class="icon-user">
                   </i>
                 </span>
-                <input type="text" placeholder="Username" />
+                <input type="hidden" value="<?=$token?>" name="token"/>
+                <input type="text" placeholder="Username" name="username"/>
               </div>
             </div>
           </div>
@@ -40,36 +42,16 @@ dump($users->currentUser($_SESSION['userid']));
                   <i class="icon-lock">
                   </i>
                 </span>
-                <input type="password" placeholder="Password" />
+                <input type="password" placeholder="Password" name="password"/>
               </div>
             </div>
           </div>
           <div class="form-actions">
             <span class="pull-left">
-              <a title="" id="example3" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-placement="bottom" data-toggle="popover" class="btn btn-success" href="" data-original-title="Popover on bottom">Popover on bottom</a>
+                  <a href="" data-content="Only <strong>Lavigny's Legion and allies</strong> may request access. Others will be denied!" data-placement="right" data-toggle="popover" data-trigger="hover" class="btn btn-info">Request Access</a>
             </span>
             <span class="pull-right">
-              <a type="submit" href="index.html" class="btn btn-success" /> Login</a>
-            </span>
-          </div>
-        </form>
-        <form id="recoverform" action="#" class="form-vertical">
-          <p class="normal_text">Enter your e-mail address below and we will send you instructions how to recover a password.</p>
-          <div class="controls">
-            <div class="main_input_box">
-              <span class="add-on bg_lo">
-                <i class="icon-envelope">
-                </i>
-              </span>
-              <input type="text" placeholder="E-mail address" />
-            </div>
-          </div>
-          <div class="form-actions">
-            <span class="pull-left">
-              <a href="#" class="flip-link btn btn-success" id="to-login">&laquo; Back to login</a>
-            </span>
-            <span class="pull-right">
-              <a class="btn btn-info"/>Reecover</a>
+              <button class="btn btn-success" name="submit">Login</button>
             </span>
           </div>
         </form>

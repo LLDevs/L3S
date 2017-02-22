@@ -1,5 +1,6 @@
 <?php
 require_once 'db.php';
+require_once 'functions.php';
 if(!empty($_SESSION['csrf_token']) && !empty($_SESSION['userid'])) {
   $currentId = $_SESSION['userid'];
 } else {
@@ -7,12 +8,6 @@ if(!empty($_SESSION['csrf_token']) && !empty($_SESSION['userid'])) {
 }
 date_default_timezone_set('UTC');
 //Thanks Knoble for the code example
-
-function dump($data) {
-  echo "<pre>";
-  echo var_dump($data);
-  echo "</pre>";
-}
 
 class User extends Database {
   public function getUser($username, $password) {

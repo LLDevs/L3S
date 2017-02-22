@@ -5,7 +5,17 @@
 </div>
 
 <!--end-Footer-part-->
-
+<?php if(array_key_exists('login', get_defined_vars())) { ?>
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/matrix.login.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/matrix.popover.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+});
+</script>
+<?php } else { ?>
 <script src="/assets/js/excanvas.min.js"></script>
 <script src="/assets/js/jquery.min.js"></script>
 <script src="/assets/js/jquery.ui.custom.js"></script>
@@ -27,7 +37,10 @@
 <script src="/assets/js/matrix.popover.js"></script>
 <script src="/assets/js/jquery.dataTables.min.js"></script>
 <script src="/assets/js/matrix.tables.js"></script>
+<script src="/assets/js/jquery.uniform.js"></script>
+<script src="/assets/js/select2.min.js"></script> 
 
+<?php } ?>
 <script type="text/javascript">
   // This function is called from the pop-up menus to transfer to
   // a different page. Ignore if the value returned is a null string:

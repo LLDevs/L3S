@@ -1,16 +1,17 @@
 <?php
-session_start();
+$login = true;
+include('includes/header.php');
 $token = "";
 if (!isset($_SESSION['csrf_token'])) {
   $_SESSION['csrf_token'] = hash('sha512', 'MfGcfqz6VO8VbHM2YS0f');
   $token = $_SESSION['csrf_token'];
+} else {
+  $token = $_SESSION['csrf_token'];
 }
-if(!empty($_SESSION['userid'])) {
-$users = new User();
-dump($users->currentUser($_SESSION['userid']));
+
+if(isset($_SESSION['userid'])) {
+  header("Location: admin/create.php");
 }
-$login = true;
-include('includes/header.php');
 ?>
       <div id="loginbox">
 
@@ -31,7 +32,7 @@ include('includes/header.php');
                   <i class="icon-user">
                   </i>
                 </span>
-                <input type="hidden" value="<?=$token?>" name="token"/>
+                <input type="hidden" value="<?=$token?>" name="token">
                 <input type="text" placeholder="Username" name="username"/>
               </div>
             </div>
@@ -52,7 +53,7 @@ include('includes/header.php');
                   <a href="" data-content="Only <strong>Lavigny's Legion and allies</strong> may request access. Others will be denied!" data-placement="right" data-toggle="popover" data-trigger="hover" class="btn btn-info">Request Access</a>
             </span>
             <span class="pull-right">
-              <button class="btn btn-success" name="submit">Login</button>
+              <input type="submit" class="btn btn-success" name="submit" value="Submit">
             </span>
           </div>
         </form>

@@ -1,7 +1,8 @@
 <?php
 session_start();
-if (!$_SESSION['csrf_token']) {
-  $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+$token = "";
+if (!isset($_SESSION['csrf_token'])) {
+  $_SESSION['csrf_token'] = hash('sha512', 'MfGcfqz6VO8VbHM2YS0f');
   $token = $_SESSION['csrf_token'];
 }
 if(!empty($_SESSION['userid'])) {

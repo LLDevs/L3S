@@ -1,7 +1,9 @@
 <?php
+session_start();
 require_once 'db.php';
 require_once 'functions.php';
 define("HASH", "tm4O5sqiW9C3n26WMG96woL0v07yybO9");
+
 if(!empty($_SESSION['csrf_token']) && !empty($_SESSION['userid'])) {
   $currentId = $_SESSION['userid'];
 } else {

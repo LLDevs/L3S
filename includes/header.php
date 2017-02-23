@@ -1,4 +1,4 @@
-<?php require_once ($_SERVER["DOCUMENT_ROOT"].'/classes/users.php') ?>
+<?php require_once ('classes/users.php') ?>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->

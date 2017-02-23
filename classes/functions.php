@@ -1,23 +1,23 @@
 <?php
-function dump($data) {
-  echo "<pre>";
-  echo var_dump($data);
-  echo "</pre>";
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
 }
 
-function breadcrumbs($data = 'Home') {
+function breadcrumbs($home = 'Home') {
     // This gets the REQUEST_URI (/path/to/file.php), splits the string (using '/') into an array, and then filters out any empty values
     $path = array_filter(explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)));
 
     // This will build our "base URL" ... Also accounts for HTTPS :)
-    $baseUrl = ($_SERVER['HTTPS'] ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
+    $base = ($_SERVER['HTTPS'] ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
 
     // Initialize a temporary array with our breadcrumbs. (starting with our home page, which I'm assuming will be the base URL)
-    $breadcrumbs = Array("<a href=\"$baseUrl\"><i class=\"icon-home\"></i> $data</a>");
+    $breadcrumbs = Array("<a href=\"$base\"><i class=\"icon-home\"></i> $home</a>");
 
     // Find out the index for the last value in our path array
-    $last = array_keys($path);
-    $last = end($last);
+    $last = end(array_keys($path));
 
     // Build the rest of the breadcrumbs
     foreach ($path AS $x => $crumb) {
@@ -26,7 +26,7 @@ function breadcrumbs($data = 'Home') {
 
         // If we are not on the last index, then display an <a> tag
         if ($x != $last)
-            $breadcrumbs[] = "<a class=\"tip-bottom\" href=\"$baseUrl$crumb\">$title</a>";
+            $breadcrumbs[] = "<a class=\"tip-bottom\" href=\"$base$crumb\">$title</a>";
         // Otherwise, just display the title (minus)
         else
             $breadcrumbs[] = '<a class="current">' . $title . '</a>';

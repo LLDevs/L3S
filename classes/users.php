@@ -1,7 +1,7 @@
 <?php
-session_start();
 require_once 'db.php';
 require_once 'functions.php';
+define("HASH", "tm4O5sqiW9C3n26WMG96woL0v07yybO9");
 
 if(!empty($_SESSION['csrf_token']) && !empty($_SESSION['userid'])) {
   $currentId = $_SESSION['userid'];
@@ -13,7 +13,7 @@ date_default_timezone_set('UTC');
 
 class User extends Database {
   public function getUser($username, $password) {
-    $encrypt_pass = crypt($password, 'tm4O5sqiW9C3n26WMG96woL0v07yybO9');
+    $encrypt_pass = crypt($password, HASH);
     $sql = "SELECT * FROM users where username='$username' AND password='$encrypt_pass'";
     $query = $this->prepare($sql);
     $query->execute();
@@ -27,7 +27,7 @@ class User extends Database {
   }//end of getUser
 
   public function addUser($username, $password, $cmdr_name, $discord, $join_date, $active) {
-    $encrypt_pass = crypt($password, 'tm4O5sqiW9C3n26WMG96woL0v07yybO9');
+    $encrypt_pass = crypt($password, HASH);
     $sql = "INSERT INTO users (username, password, cmdr_name, discord, join_date, active) VALUES(:username, :password, :cmdr_name, :discord, :join_date, :active)";
     $query = $this->prepare($sql);
     $query->bindValue(":username", $username);
@@ -38,7 +38,7 @@ class User extends Database {
     $query->bindValue(":active", $active);
 
     if($query->execute()) {
-      return "User has been added~";
+      return "User has been added.";
     } else {
       return false;
     }
@@ -49,7 +49,7 @@ class User extends Database {
     $query = $this->prepare($sql);
 
     if($query->execute()) {
-      return "User with ID: {$userId}, has been removed!";
+      return "User with ID: {$userId}, has been removed.";
     }
   }//end removeUser
 
@@ -69,12 +69,12 @@ class User extends Database {
   }//end getAllUsers
 
   public function updateUser($username, $password, $cmdr_name, $discord, $join_date, $modified_date, $active) {
-    $encrypt_pass = crypt($password, 'tm4O5sqiW9C3n26WMG96woL0v07yybO9');
+    $encrypt_pass = crypt($password, HASH);
     $sql = "UPDATE users SET username='$username', password='$encrypt_pass', cmdr_name='$cmdr_name', discord='$discord', join_date='$join_date', modified_date='$modified_date', active='$active')";
     $query = $this->prepare($sql);
     if($query->execute())
 		{
-			return "Update Successful!";
+			return "Update Successful.";
 		}
   }//end of updateUser
 

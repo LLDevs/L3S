@@ -5,41 +5,40 @@
 </div>
 
 <!--end-Footer-part-->
-<?php if(array_key_exists('login', get_defined_vars())) { ?>
-<script src="/assets/js/jquery.min.js"></script>
-<script src="/assets/js/matrix.login.js"></script>
-<script src="/assets/js/bootstrap.min.js"></script>
-<script src="/assets/js/matrix.popover.js"></script>
+<?php if($_SESSION['usertype']=="admin" || $_SESSION['usertype']=="normal") { /* if logged in */?>
+<script src="js/excanvas.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.ui.custom.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.flot.min.js"></script>
+<script src="js/jquery.flot.resize.min.js"></script>
+<script src="js/jquery.peity.min.js"></script>
+<script src="js/fullcalendar.min.js"></script>
+<script src="js/matrix.js"></script>
+<script src="js/matrix.dashboard.js"></script>
+<script src="js/jquery.gritter.min.js"></script>
+<script src="js/matrix.interface.js"></script>
+<script src="js/matrix.chat.js"></script>
+<script src="js/jquery.validate.js"></script>
+<script src="js/matrix.form_validation.js"></script>
+<script src="js/jquery.wizard.js"></script>
+<script src="js/jquery.uniform.js"></script>
+<script src="js/select2.min.js"></script>
+<script src="js/matrix.popover.js"></script>
+<script src="js/jquery.dataTables.min.js"></script>
+<script src="js/matrix.tables.js"></script>
+<script src="js/jquery.uniform.js"></script>
+<script src="js/select2.min.js"></script>
+<?php } else { ?>
+<script src="js/jquery.min.js"></script>
+<script src="js/matrix.login.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/matrix.popover.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover();
 });
 </script>
-<?php } else { ?>
-<script src="/assets/js/excanvas.min.js"></script>
-<script src="/assets/js/jquery.min.js"></script>
-<script src="/assets/js/jquery.ui.custom.js"></script>
-<script src="/assets/js/bootstrap.min.js"></script>
-<script src="/assets/js/jquery.flot.min.js"></script>
-<script src="/assets/js/jquery.flot.resize.min.js"></script>
-<script src="/assets/js/jquery.peity.min.js"></script>
-<script src="/assets/js/fullcalendar.min.js"></script>
-<script src="/assets/js/matrix.js"></script>
-<script src="/assets/js/matrix.dashboard.js"></script>
-<script src="/assets/js/jquery.gritter.min.js"></script>
-<script src="/assets/js/matrix.interface.js"></script>
-<script src="/assets/js/matrix.chat.js"></script>
-<script src="/assets/js/jquery.validate.js"></script>
-<script src="/assets/js/matrix.form_validation.js"></script>
-<script src="/assets/js/jquery.wizard.js"></script>
-<script src="/assets/js/jquery.uniform.js"></script>
-<script src="/assets/js/select2.min.js"></script>
-<script src="/assets/js/matrix.popover.js"></script>
-<script src="/assets/js/jquery.dataTables.min.js"></script>
-<script src="/assets/js/matrix.tables.js"></script>
-<script src="/assets/js/jquery.uniform.js"></script>
-<script src="/assets/js/select2.min.js"></script> 
-
 <?php } ?>
 <script type="text/javascript">
   // This function is called from the pop-up menus to transfer to

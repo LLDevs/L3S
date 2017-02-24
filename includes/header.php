@@ -1,4 +1,11 @@
-<?php require_once ('classes/users.php') ?>
+<?php
+session_start();
+$token = "";
+if (!isset($_SESSION['csrf_token'])) { //should be on every page? maybe in header?
+  $_SESSION['csrf_token'] = hash('sha512', 'MfGcfqz6VO8VbHM2YS0f');
+  $token = $_SESSION['csrf_token'];
+}
+require_once ('classes/users.php') ?>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->

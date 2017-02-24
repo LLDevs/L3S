@@ -1,9 +1,9 @@
 <?php
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
+function dump($data)
+{
+  echo "<pre>";
+  echo var_dump($data);
+  echo "</pre>";
 }
 
 function breadcrumbs($home = 'Home') {

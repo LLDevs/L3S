@@ -47,7 +47,7 @@ class User extends Database
 
     if($query->execute())
     {
-      return "User has been added.";
+      return true;
     }
     else
     {
@@ -141,7 +141,8 @@ class User extends Database
   }
   $userInfo['ranks_id'] = implode(',',$items1);
 
-    $_SESSION['userinfo'] = $userInfo;
+    // $_SESSION['userinfo'] = $userInfo;
+    return $userInfo;
 
   }
 

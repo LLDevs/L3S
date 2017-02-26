@@ -1,11 +1,10 @@
 <?php
 session_start();
-$token = "";
-if (!isset($_SESSION['csrf_token'])) { //should be on every page? maybe in header?
-  $_SESSION['csrf_token'] = hash('sha512', 'MfGcfqz6VO8VbHM2YS0f');
-  $token = $_SESSION['csrf_token'];
+$urlPath = explode("/",parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+if($urlPath[1] == "") {
+  $login = true;
 }
-require_once ('classes/users.php') ?>
+require_once ($_SERVER['DOCUMENT_ROOT'].'/classes/users.php') ?>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
@@ -14,24 +13,35 @@ require_once ('classes/users.php') ?>
 <head>
 <title>Matrix Admin</title>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="css/bootstrap.min.css" />
-<link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
-<link rel="stylesheet" href="font-awesome/css/font-awesome.css" />
-<link rel="stylesheet" href="css/custom.css" />
 <link rel="shortcut icon" type="image/x-icon" href="logoicon.ico"/>
-<link rel="stylesheet" href="css/fullcalendar.css" />
-<link rel="stylesheet" href="css/matrix-style.css" />
-<link rel="stylesheet" href="css/matrix-media.css" />
-<link rel="stylesheet" href="css/jquery.gritter.css" />
-<link rel="stylesheet" href="css/uniform.css" />
-<link rel="stylesheet" href="css/select2.css" />
-<link rel="stylesheet" href="css/matrix-login.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<?php if(isset($login)) { ?>
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="/css/matrix-login.css" />
+<link rel="stylesheet" href="font-awesome/css/font-awesome.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800" />
+<?php } else { ?>
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/bootstrap-responsive.min.css" />
+  <link rel="stylesheet" href="font-awesome/css/font-awesome.css" />
+  <link rel="stylesheet" href="/css/fullcalendar.css" />
+  <link rel="stylesheet" href="/css/matrix-style.css" />
+  <link rel="stylesheet" href="/css/matrix-media.css" />
+  <link rel="stylesheet" href="/css/jquery.gritter.css" />
+  <link rel="stylesheet" href="/css/uniform.css" />
+  <link rel="stylesheet" href="/css/select2.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800" />
+  <link rel="stylesheet" href="/css/custom.css" />
+  <?php } ?>
 </head>
 <body>
 
 <?php
-if($_SESSION['usertype'] != false){
+
+
+if(!isset($login)) {
 	include('nav.php');
 }
+
 ?>

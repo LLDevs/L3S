@@ -1,26 +1,35 @@
 <?php
-session_start();
+require_once($_SERVER['DOCUMENT_ROOT'].'/includes/header.php');
+$token = "";
 if (!isset($_SESSION['csrf_token'])) { //should be on every page? maybe in header?
   $_SESSION['csrf_token'] = hash('sha512', 'MfGcfqz6VO8VbHM2YS0f');
-}
   $token = $_SESSION['csrf_token'];
-//clears the user from the session if there is one, not how it should work
-/*if(!empty($_SESSION['userid'])) { 
-$users = new User(); 
-dump($users->currentUser($_SESSION['userid']));
-}*/
-if (!isset($_SESSION['usertype'])){
-	$_SESSION['usertype'] = false; //for use in the header section below
+} else {
+  $token = $_SESSION['csrf_token'];
 }
-elseif($_SESSION['usertype'] != false){ //change this to use cookies
-	header('Location:main.php');
+  dump($_SESSION);
+
+$users = new User();
+if(isset($_POST['submit'])) {
+  if(hash_equals($_POST['token'], $_SESSION['csrf_token'])) {
+  $username = $_POST['username'];
+  $password = $_POST['password'];
+  $userLog = $users->getUser($username,$password);
+  if(!$userLog) {
+    echo 'Wrong user or pass';
+  } else {
+    $userinfo = $users->getAllUserInfo($userLog['id']);
+    $_SESSION['userinfo'] = $userinfo; //Used to get userinfo
+    header("Location: admin/create.php");
+  }
+  } else {
+    header("Location: main.php");
+  }
 }
- 
-include('includes/header.php');
 ?>
       <div id="loginbox">
 
-        <form id="loginform" class="form-vertical" action="login.php" method="post">
+        <form id="loginform" class="form-vertical" action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
           <div class="control-group normal_text">
             <h3>
               <img src="img/logo.png" alt="Logo" />
@@ -63,4 +72,4 @@ include('includes/header.php');
           </div>
         </form>
       </div>
-<?php include('includes/footer.php'); ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'].'/includes/footer.php'); ?>

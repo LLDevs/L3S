@@ -1,5 +1,5 @@
 <?php
-require_once ($_SERVER["DOCUMENT_ROOT"].'/includes/header.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/includes/header.php');
 
 ?>
 <div id="content">
@@ -46,39 +46,34 @@ require_once ($_SERVER["DOCUMENT_ROOT"].'/includes/header.php');
             <div class="control-group">
               <label class="control-label">Active</label>
               <div class="controls">
-                <select name="active">
-                  <option value="1" selected>Yes</option>
+                <select name="activeSelect">
+                  <option selected></option>
+                  <option value="1">Yes</option>
                   <option value="0">No</option>
                 </select>
               </div>
             </div>
             <div class="form-actions">
-              <button type="submit" class="btn btn-success" name="submit">Save</button>
+              <button type="submit" class="btn btn-success" name="submit" value="submit">Save</button>
             </div>
           </form>
           <?php
           $user = new User();
-          $username = $password = $cmdr = $discord = $active = $token = "";
-          if ($_SERVER["REQUEST_METHOD"] == "POST") {
+          $join = date("Y-m-d H:i:s");
+          if(isset($_POST['submit'])) {
             $token = $_POST['token'];
             $username = $_POST["username"];
-            $password = crypt($_POST["password"], 'tm4O5sqiW9C3n26WMG96woL0v07yybO9');
+            $password = crypt($_POST["password"], HASH);
             $cmdr = $_POST["cmdr"];
             $discord = $_POST["discord"];
-            $active = $_POST["active"];
+            $active = $_POST["activeSelect"];
+            if(hash_equals($token, $_SESSION['csrf_token'])) {
+              if($user->addUser($username,$password,$cmdr,$discord,$join,$active)) {
+                echo "User Created!";
+              }
+            }
           }
-          if(hash_equals($token, $_SESSION['csrf_token'])) {
-          echo "<h2>Your Input:</h2>";
-echo $username;
-echo "<br>";
-echo $password;
-echo "<br>";
-echo $cmdr;
-echo "<br>";
-echo $discord;
-echo "<br>";
-echo $active;
-}
+
 
           ?>
         </div>

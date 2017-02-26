@@ -2,7 +2,6 @@
 require_once 'db.php';
 require_once 'functions.php';
 
-
 class Permission extends Database
 {
   public function check($rankIds, $perm)
